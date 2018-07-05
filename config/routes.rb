@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :breeds
-
   root "breeds#index"
+
+  resources :breeds,only: [:index] do
+    get 'list', on: :collection
+  end
+
+  get 'breeds/:breed_name' => "breeds#fetch_by_breed"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
